@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create zip files locally in your browser.">
+  <title>File Zipper — local, simple, private</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="File Zipper home">Fzip<span class="brand-dot">.</span></a>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <h1 id="page-title">Zip it. Keep it local.</h1>
+        <p class="intro-copy">Bundle files into one neat archive without sending anything to a server.</p>
+      </section>
+
+      <section class="workspace" aria-label="File zipper workspace">
+        <div class="workspace-topline">
+          <p class="section-label">Drop your files here</p>
+          <p class="privacy-note"><span class="status-dot" aria-hidden="true"></span>Private by default</p>
+        </div>
+
+        <div class="drop-zone" id="dropZone" tabindex="0" role="button" aria-label="Drop files here or open the file picker">
+          <div class="drop-icon" aria-hidden="true"><i data-lucide="arrow-down-to-line"></i></div>
+          <div>
+            <h2>Drop files to start</h2>
+            <p>or choose files from your device</p>
+          </div>
+          <div class="drop-actions">
+            <button class="button button-dark" id="browseButton" type="button"><i data-lucide="folder-open"></i>Browse files</button>
+            <button class="button button-outline" id="browseFolderButton" type="button"><i data-lucide="folder-tree"></i>Browse folder</button>
+          </div>
+          <input id="fileInput" type="file" multiple hidden>
+          <input id="folderInput" type="file" webkitdirectory directory multiple hidden>
+        </div>
+
+        <div class="error-message" id="errorMessage" role="alert" aria-live="polite"></div>
+
+        <div class="file-panel" aria-live="polite">
+          <div class="panel-heading">
+            <div>
+              <p class="section-label">Selected files</p>
+              <p class="file-count" id="fileCount">No files added</p>
+            </div>
+            <button class="text-button danger-text" id="clearButton" type="button" disabled>Clear all</button>
+          </div>
+          <div class="file-list" id="fileList">
+            <div class="empty-state" id="emptyState">
+              <i data-lucide="inbox" aria-hidden="true"></i>
+              <p>Your file list is empty.</p>
+            </div>
+          </div>
+          <div class="total-row">
+            <span>Total size</span>
+            <strong id="totalSize">0 B</strong>
+          </div>
+        </div>
+
+        <div class="settings-panel">
+          <div class="setting-block">
+            <label for="zipName">Zip file name</label>
+            <div class="input-with-suffix">
+              <input id="zipName" type="text" value="my-files" maxlength="80" spellcheck="false">
+              <span>.zip</span>
+            </div>
+          </div>
+          <div class="setting-block compression-block">
+            <span class="setting-label">Compression</span>
+            <div class="segmented-control" role="radiogroup" aria-label="Compression level">
+              <label><input type="radio" name="compression" value="0"><span>None</span></label>
+              <label><input type="radio" name="compression" value="6" checked><span>Normal</span></label>
+              <label><input type="radio" name="compression" value="9"><span>Max</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-panel">
+          <div class="progress-wrap" id="progressWrap" hidden>
+            <div class="progress-meta"><span id="progressLabel">Preparing archive…</span><span id="progressValue">0%</span></div>
+            <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+          </div>
+          <button class="button button-primary create-button" id="createButton" type="button" disabled><i data-lucide="archive"></i>Create zip</button>
+          <a class="button button-download" id="downloadButton" href="#" download hidden><i data-lucide="download"></i>Download zip</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Data Structures Final Project By Joash Tadle</p>
+      <p>Everything happens in this tab.</p>
+    </footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
